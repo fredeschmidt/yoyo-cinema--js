@@ -1,0 +1,31 @@
+
+
+.btn{
+    @include btn-txt;
+    color: $white;
+    background-color: $purple;
+    cursor: pointer;
+    transition: $transition-ease;
+
+    &:focus{
+        box-shadow: none;
+    }
+
+    &--rounded{
+        height: 40px;   
+        width: 150px; 
+        padding-top: 10px;
+        border-radius: 70px;
+        transition: $transition-ease;
+
+        &:hover{
+            text-decoration: none;
+            color: rgba(255,255,255,0.4);
+        }
+
+        &.active{
+            text-decoration: none;
+            color: rgba(255,255,255,0.4);
+        }
+    }
+}

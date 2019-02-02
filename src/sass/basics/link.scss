@@ -1,0 +1,17 @@
+
+a{
+	color: $white;
+
+	i{
+		transition: $transition-ease;
+	}
+
+	&:hover{
+		color: $white;
+		text-decoration: none;
+
+		i{
+			color: $pink;
+		}
+	}
+}

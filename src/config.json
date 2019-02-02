@@ -1,0 +1,25 @@
+{
+  "projects":[
+    {
+      "production": false, 
+      "build": true,
+      "watch": true,
+      "imagemin": true,
+      "src": {
+        "sass": "/src/sass/app.scss",
+        "js": "/src/js/app.js",
+        "images": "/src/images/**/*.@(jpg|jpeg|png|gif|svg|ico)",
+        "fonts": "/src/fonts/*.@(eot|svg|ttf|woff|woff2)",
+        "layouts": "/src/layouts/*.@(html|cshtml|json|config)",
+        "layoutsWatch": "/src/layouts/**/*"
+      },
+      "deploy": {
+        "css": ["./deploy/assets/css"],
+        "js": ["./deploy/assets/js"],
+        "images":["./deploy/assets/images"],
+        "fonts": ["./deploy/assets/fonts"],
+        "layouts": ["./deploy/"]
+      }
+    }
+  ]
+}

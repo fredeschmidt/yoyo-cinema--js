@@ -1,0 +1,53 @@
+
+
+input[type=text]{ 
+    height: 60px;
+    width: 100%;
+    padding: 15px;
+    background-color: $white;
+    border: none;
+    border-bottom: $pink solid 2px;
+    @include input-txt;
+
+    &:focus{
+        outline: none;
+    }
+}
+
+
+
+.checkbox {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    
+    // hide the browser's default checkbox
+    input[type=checkbox] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+
+        &:checked ~ .i--favorite {
+            transform: scale(1.3); 
+        }
+
+        &:checked ~ .i--favorite:before {
+            color: $pink;
+            font-weight: 900;
+        }
+    }
+
+    // custom checkbox
+    .i--favorite {
+        transform: scale(1);
+        transition: $transition-ease;
+
+        &:before{
+            transition: $transition-ease;
+        }
+    }
+
+    &:hover input ~ .i--favorite {
+        transform: scale(1.3);
+    }
+}

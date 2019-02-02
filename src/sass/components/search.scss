@@ -1,0 +1,21 @@
+
+.search{
+
+	@media (max-width: $small-screen) {
+        margin-top: 10px;
+    }
+
+    i{
+        position: absolute;
+        z-index: 100;
+        top: 16px;
+        right: 30px;
+        font-size: 25px;
+        color: $dark-purple;
+
+    	@media (max-width: $small-screen) {
+            top: 27px;
+        }
+    }
+}
+

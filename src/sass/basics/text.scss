@@ -1,0 +1,85 @@
+
+@mixin large-header(){
+	font-family: $font-basic;
+	font-size: 45px;
+	line-height: 55px;
+	font-weight: bold;
+
+	@media (max-width: $small-screen) {
+		font-size: 30px;
+		line-height: 35px;
+	}
+}
+
+@mixin small-title(){
+	font-family: $font-basic;
+	font-size: 10px;
+	line-height: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+@mixin highlighted-txt(){
+	font-family: $font-basic;
+	font-size: 45px;
+	line-height: 55px;
+	font-weight: bold;
+	color: $pink;
+	display: block;
+
+	@media (max-width: $small-screen) {
+		font-size: 30px;
+		line-height: 35px;
+	}
+}
+
+@mixin normal-txt(){
+	font-family: $font-basic;
+	font-size: 14px;
+	line-height: 19px;
+	font-weight: light;
+
+	@media (max-width: $small-screen) {
+		font-size: 12px;
+	}
+}
+
+@mixin input-txt(){
+	font-family: $font-basic;
+	font-size: 19px;
+	line-height: 26px;
+	font-weight: bold;
+
+	@media (max-width: $small-screen) {
+		line-height: 26px;
+	}
+}
+
+@mixin btn-txt(){
+	font-family: $font-basic; 
+    font-size: 12px;  
+    line-height: 19px;   
+    font-weight: bold;   
+    text-align: center;
+    text-transform: uppercase;
+    white-space: normal;
+}
+
+
+
+
+h1{
+    @include large-header;
+}
+
+p{
+    @include normal-txt;
+}
+
+small{
+	@include small-title;
+}
+
+span{
+	@include highlighted-txt;
+}
