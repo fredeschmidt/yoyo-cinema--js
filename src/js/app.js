@@ -12,10 +12,6 @@
 //=require ../../node_modules/bootstrap/js/dist/tooltip.js
 //=require ../../node_modules/bootstrap/js/dist/util.js
 
-
-// onClick
-//=require onClick/goBack.js
-
 // components
 //=require components/search.js
 //=require components/details.js

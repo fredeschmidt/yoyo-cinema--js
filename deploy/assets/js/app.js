@@ -8656,12 +8656,6 @@ var Util = function($) {
 }($);
 //# sourceMappingURL=util.js.map
 
-
-// onClick
-function goBack() {
-    window.history.back();
-}
-
 // components
 
 $(function() {
@@ -8736,33 +8730,17 @@ $(function() {
 
 
     function checkStorage() {
-        var keys = Object.keys(localStorage);
-        var i = 0,
-            key;
-
-        for (; key = keys[i]; i++) {
-            var keyTrue = JSON.parse(localStorage.getItem(key));
-            if (keyTrue) {
-                // check saved favorites
-                $(outputSearchResults).find('input#' + key + '').attr('checked', true);
-            }
-        }
+        Object.keys(localStorage)
+            .forEach(function(key) {
+                if (/^favorite-/.test(key)) {
+                    var keyTrue = JSON.parse(localStorage.getItem(key));
+                    if (keyTrue) {
+                        // check saved favorites
+                        $(outputSearchResults).find('input#' + key + '').attr('checked', true);
+                    }
+                }
+            });
     }
-
-
-    // function favoriteList() {
-    //     var keys = Object.keys(localStorage);
-    //     var i = 0, key;
-
-    //     for (; key = keys[i]; i++) {
-    //         var keyTrue = JSON.parse(localStorage.getItem(key));
-    //         if(keyTrue){
-    //             // adds saved favorites to favorite list
-    //             var favoriteLi = $(outputSearchResults).find('input#'+key+'').parents('li');
-    //             $(favoriteLi).clone();
-    //         } 
-    //     }
-    // }
 
 });
 
@@ -8838,7 +8816,6 @@ $(function() {
 
 $(function() {
 
-
     // favorites output wrapper
     var outputFavorites = $('.results--favorites ul');
 
@@ -8848,11 +8825,28 @@ $(function() {
         $(outputFavorites).find('input[type="checkbox"]').attr('checked', true);
     }
 
+    // // on unfavorite click in favorite list
+    // $(document).on('click','.results--favorites input[type="checkbox"]',function() {
+
+    //     // check / uncheck favorites and save favorites to localstorage
+    //     var checkbox = $(this);
+    //     var favId = $(checkbox).attr('id');
+
+    //     if($(checkbox).attr('checked')) {
+    //         $(checkbox).attr('checked', false);
+    //         localStorage.setItem(favId, false);
+    //         // remove li from favorite list
+    //         $(outputFavorites).find('#'+favId+'').parents('li').remove();
+    //         // remove from localstorage
+    //         localStorage.setItem('favorites-li', $(outputFavorites).html());
+    //     }
+    // });
+
 
     // search results output wrapper
     var outputSearchResults = $('.results--search ul');
 
-    // on favorite click
+    // on favorite click in result list
     $(document).on('click', '.results--search input[type="checkbox"]', function() {
 
         // check / uncheck favorites and save favorites to localstorage

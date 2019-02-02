@@ -66,9 +66,35 @@
     &--favorites{
         ul{
             li{
+                padding-top: 40px;
                 border-bottom: $pink solid 1px;
                 .results_item{
-                    // color: $pink;
+                    display: block;
+                    font-size: 20px;
+                    line-height: 25px;
+
+                    .results_item_choices{
+                        display: flex;
+                        justify-content: space-between;
+                        padding-top: 10px;
+
+                        .btn--details{
+                            background-color: $dark-purple;
+                            height: 35px;
+                            width: 115px;
+                            padding-top: 8px;
+                        }
+
+                        .i--favorite{
+                            margin-top: 10px;
+                        }
+                    }
+                }
+
+                .results_detail{
+                    &_img{
+                        width: 50%;
+                    }
                 }
             }
         }

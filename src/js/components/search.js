@@ -71,31 +71,16 @@ $(function () {
 
 
     function checkStorage() {
-        var keys = Object.keys(localStorage);
-        var i = 0, key;
-
-        for (; key = keys[i]; i++) {
-            var keyTrue = JSON.parse(localStorage.getItem(key));
-            if(keyTrue){
-                // check saved favorites
-                $(outputSearchResults).find('input#'+key+'').attr('checked', true);
-            } 
-        }
+        Object.keys(localStorage)
+              .forEach(function(key){
+                   if (/^favorite-/.test(key)) {
+                       var keyTrue = JSON.parse(localStorage.getItem(key));
+                       if(keyTrue){
+                           // check saved favorites
+                           $(outputSearchResults).find('input#'+key+'').attr('checked', true);
+                       } 
+                   }
+               });
     }
-
-
-    // function favoriteList() {
-    //     var keys = Object.keys(localStorage);
-    //     var i = 0, key;
-
-    //     for (; key = keys[i]; i++) {
-    //         var keyTrue = JSON.parse(localStorage.getItem(key));
-    //         if(keyTrue){
-    //             // adds saved favorites to favorite list
-    //             var favoriteLi = $(outputSearchResults).find('input#'+key+'').parents('li');
-    //             $(favoriteLi).clone();
-    //         } 
-    //     }
-    // }
    
 });
