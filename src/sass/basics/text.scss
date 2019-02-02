@@ -11,6 +11,18 @@
 	}
 }
 
+@mixin medium-header(){
+	font-family: $font-basic;
+	font-size: 25px;
+	line-height: 25px;
+	font-weight: bold;
+
+	@media (max-width: $small-screen) {
+		font-size: 30px;
+		line-height: 35px;
+	}
+}
+
 @mixin small-title(){
 	font-family: $font-basic;
 	font-size: 10px;
@@ -70,6 +82,10 @@
 
 h1{
     @include large-header;
+}
+
+h2{
+    @include medium-header;
 }
 
 p{

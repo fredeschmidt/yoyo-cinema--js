@@ -62,4 +62,15 @@
         	}
         }
     }
+
+    &--favorites{
+        ul{
+            li{
+                border-bottom: $pink solid 1px;
+                .results_item{
+                    // color: $pink;
+                }
+            }
+        }
+    }
 }
