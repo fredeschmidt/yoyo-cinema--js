@@ -5,10 +5,14 @@ $(function () {
         return;
     }
 
+    // search results output wrapper
+    var outputSearchResults = $('.results--search ul');
+
     // on search
     var input = $('.search').find('input');
     $(input).keyup(function (event) {  
 
+        // search val
         var inputVal = $(this).val();
         $.ajax({
             method: 'GET',
@@ -18,8 +22,7 @@ $(function () {
 
         .done(function(response) {
 
-            // search results output
-            var outputSearchResults = $('.results--search ul');
+            // empty search results output wrapper
             $(outputSearchResults).empty();
 
             // api results 
@@ -32,7 +35,7 @@ $(function () {
                 // if api results match search val
                 if (resultTitle.indexOf(inputValMatch) > -1) {
                     
-                    // from 2 chars matches show results
+                    // from 2 chars matches
                     if (inputVal.length >= 2) {
                         var resultId = results[i].id;
                         var resultTitle = results[i].title;
@@ -49,10 +52,13 @@ $(function () {
                         '<div class="results_detail"></div>' +
                         '</li>';
 
-                        // append these to output list
+                        // append results to output wrapper
                         $(resultItems).each(function (i, item) {
                             $(outputSearchResults).append(item);
                         });
+
+                        // check saved favorites from localstorage
+                        checkStorage();
                     }
                 }
             }
@@ -63,4 +69,18 @@ $(function () {
         });
 
     });  
+
+
+    function checkStorage() {
+        var keys = Object.keys(localStorage);
+        var i = 0, key;
+
+        for (; key = keys[i]; i++) {
+            var keyTrue = JSON.parse(localStorage.getItem(key));
+            if(keyTrue){
+                $(outputSearchResults).find('input#'+key+'').attr('checked', true);
+            }
+            
+        }
+    }
 });

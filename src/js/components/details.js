@@ -1,23 +1,20 @@
 
 $(function () {
 
-	if (!$('.results').length) {
-        return;
-    }
-
     // on detail click
 	$(document).on('click','.results .btn--details',function(event) {
         event.preventDefault();
 
-		// details output
+		// details output wrapper
 		var output = $(this).parents('li').find('.results_detail');
         $(output).empty();
 
-        // btn
+        // detail btn
         var txt = $(output).is(':visible') ? 'Show details' : 'Hide details';
      	$(this).text(txt);
      	$(this).toggleClass('active');
 
+        // detail id
 		var detailId = $(this).attr('data-detail');
 		$.ajax({
             method: 'GET',
@@ -28,11 +25,10 @@ $(function () {
         .done(function(response) {
 
             $(output).append('<div class="results_detail_img"></div><div class="results_detail_info"></div>');
-
             var outputImg = $(output).find('.results_detail_img');
             var outputInfo = $(output).find('.results_detail_info');
 
-            // api details
+            // api details append to output wrapper
             var title = response.title;
             var img = response.poster_path;
             if (!img == "") {

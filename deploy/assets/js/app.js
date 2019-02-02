@@ -8670,10 +8670,14 @@ $(function() {
         return;
     }
 
+    // search results output wrapper
+    var outputSearchResults = $('.results--search ul');
+
     // on search
     var input = $('.search').find('input');
     $(input).keyup(function(event) {
 
+        // search val
         var inputVal = $(this).val();
         $.ajax({
                 method: 'GET',
@@ -8683,8 +8687,7 @@ $(function() {
 
             .done(function(response) {
 
-                // search results output
-                var outputSearchResults = $('.results--search ul');
+                // empty search results output wrapper
                 $(outputSearchResults).empty();
 
                 // api results 
@@ -8697,7 +8700,7 @@ $(function() {
                     // if api results match search val
                     if (resultTitle.indexOf(inputValMatch) > -1) {
 
-                        // from 2 chars matches show results
+                        // from 2 chars matches
                         if (inputVal.length >= 2) {
                             var resultId = results[i].id;
                             var resultTitle = results[i].title;
@@ -8714,10 +8717,13 @@ $(function() {
                                 '<div class="results_detail"></div>' +
                                 '</li>';
 
-                            // append these to output list
+                            // append results to output wrapper
                             $(resultItems).each(function(i, item) {
                                 $(outputSearchResults).append(item);
                             });
+
+                            // check saved favorites from localstorage
+                            checkStorage();
                         }
                     }
                 }
@@ -8728,28 +8734,40 @@ $(function() {
             });
 
     });
+
+
+    function checkStorage() {
+        var keys = Object.keys(localStorage);
+        var i = 0,
+            key;
+
+        for (; key = keys[i]; i++) {
+            var keyTrue = JSON.parse(localStorage.getItem(key));
+            if (keyTrue) {
+                $(outputSearchResults).find('input#' + key + '').attr('checked', true);
+            }
+
+        }
+    }
 });
 
 
 $(function() {
 
-    if (!$('.results').length) {
-        return;
-    }
-
     // on detail click
     $(document).on('click', '.results .btn--details', function(event) {
         event.preventDefault();
 
-        // details output
+        // details output wrapper
         var output = $(this).parents('li').find('.results_detail');
         $(output).empty();
 
-        // btn
+        // detail btn
         var txt = $(output).is(':visible') ? 'Show details' : 'Hide details';
         $(this).text(txt);
         $(this).toggleClass('active');
 
+        // detail id
         var detailId = $(this).attr('data-detail');
         $.ajax({
                 method: 'GET',
@@ -8760,11 +8778,10 @@ $(function() {
             .done(function(response) {
 
                 $(output).append('<div class="results_detail_img"></div><div class="results_detail_info"></div>');
-
                 var outputImg = $(output).find('.results_detail_img');
                 var outputInfo = $(output).find('.results_detail_info');
 
-                // api details
+                // api details append to output wrapper
                 var title = response.title;
                 var img = response.poster_path;
                 if (!img == "") {
@@ -8806,37 +8823,22 @@ $(function() {
 
 $(function() {
 
-    // checkStorage();
-
     // on favorite click
     $(document).on('click', '.results input[type="checkbox"]', function() {
 
-        // favorites output
+        // favorites output wrapper
         var outputFavorites = $('.results--favorites ul');
 
-        // check / uncheck favorites
+        // check / uncheck favorites and save favorites to localstorage
         var checkbox = $(this);
+        var favId = $(checkbox).attr('id');
         if ($(checkbox).attr('checked')) {
             $(checkbox).attr('checked', false);
+            localStorage.setItem(favId, false);
         } else {
             $(checkbox).attr('checked', true);
+            localStorage.setItem(favId, true);
         }
 
-        // save favorites to local storage
-        // $('input[type="checkbox"]:checked').each(function(i, favChecked){
-        //     var favId = $(favChecked).attr('id');
-        //     localStorage.setItem(favId, true);
-        // });
-
     });
-
-
-    // function checkStorage() {
-    //     var keys = Object.keys(localStorage);
-    //     var i = 0, key;
-
-    //     for (; key = keys[i]; i++) {
-    //         $('.results').find('input#'+key+'').attr('checked', true);
-    //     }
-    // }
 });

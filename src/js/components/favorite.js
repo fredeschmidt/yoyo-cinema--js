@@ -1,37 +1,22 @@
 
 $(function () {
 
-    // checkStorage();
-
     // on favorite click
     $(document).on('click','.results input[type="checkbox"]',function() {
 
-        // favorites output
+        // favorites output wrapper
         var outputFavorites = $('.results--favorites ul');
 
-        // check / uncheck favorites
+        // check / uncheck favorites and save favorites to localstorage
         var checkbox = $(this);
+        var favId = $(checkbox).attr('id');
         if($(checkbox).attr('checked')) {
             $(checkbox).attr('checked', false);
+            localStorage.setItem(favId, false);
         }else {
             $(checkbox).attr('checked', true);
+            localStorage.setItem(favId, true);
         }
 
-        // save favorites to local storage
-        // $('input[type="checkbox"]:checked').each(function(i, favChecked){
-        //     var favId = $(favChecked).attr('id');
-        //     localStorage.setItem(favId, true);
-        // });
-
     });
-
-
-    // function checkStorage() {
-    //     var keys = Object.keys(localStorage);
-    //     var i = 0, key;
-
-    //     for (; key = keys[i]; i++) {
-    //         $('.results').find('input#'+key+'').attr('checked', true);
-    //     }
-    // }
 });
